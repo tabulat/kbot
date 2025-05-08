@@ -20,17 +20,16 @@ var (
 // kbotCmd represents the kbot command
 var kbotCmd = &cobra.Command{
 	Use:     "kbot",
-	Aliases: []string{"start"},
-	Short:   "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Aliases: []string{"start", "s", "com"},
+	Short:   "Telegram bot for determining time",
+	Long: `Allows you to find out the local time.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Usage:
+	/start time	- Show local time
+	/start hello   	- Get a greeting from the bot`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Printf("kbot %s started", appVersion)
+		fmt.Println("kbot %s started", appVersion)
 
 		kbot, err := telebot.NewBot(telebot.Settings{
 			URL:    "",
@@ -45,15 +44,18 @@ to quickly create a Cobra application.`,
 
 		kbot.Handle(telebot.OnText, func(m telebot.Context) error {
 
-			log.Print(m.Message().Payload, m.Text())
+			log.Printf("Receive message: %s", m.Text())
 			payload := m.Message().Payload
 
 			switch payload {
 			case "hello":
-				m.Send(fmt.Sprintf("Hello I'm KBOT %s!", appVersion))
+				return m.Send(fmt.Sprintf("Hello I'm KBOT %s!", appVersion))
+			case "time":
+				now := time.Now()
+				return m.Send(fmt.Sprintf("%s\n", now.Format("2006-01-02 15:04:05")))
+			default:
+				return m.Send("Usage: /start hello|time")
 			}
-
-			return err
 
 		})
 
