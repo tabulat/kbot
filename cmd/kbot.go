@@ -29,7 +29,8 @@ Usage:
 	/start hello   	- Get a greeting from the bot`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("kbot %s started", appVersion)
+		fmt.Printf("kbot %s started", appVersion)
+		fmt.Println()
 
 		kbot, err := telebot.NewBot(telebot.Settings{
 			URL:    "",

@@ -1,9 +1,8 @@
-FROM quay.io/projectquay/golang:1.22 as builder
+FROM golang:1.24 as builder
 
 WORKDIR /go/src/app
 COPY . .
-ARG TARGETARCH
-RUN make build TARGETARCH=$TARGETARCH
+RUN make build
 
 FROM scratch
 WORKDIR /
