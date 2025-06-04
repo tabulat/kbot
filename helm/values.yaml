@@ -14,8 +14,8 @@ image:
   
 secret:
   name: "kbot"
-  env: "token"
-  key: "TELE_TOKEN"
+  env: "TELE_TOKEN"
+  key: "token"
 
 service:
   name: http
