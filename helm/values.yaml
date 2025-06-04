@@ -9,7 +9,7 @@ replicaCount: 1
 image:
   repository: "tabulat"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.5-f3017a6"
+  tag: "v1.0.8-f0203c2"
   arch: amd64
   
 secret:
@@ -20,3 +20,6 @@ secret:
 service:
   name: http
   port: 80
+  
+securityContext:
+  privileged: true
