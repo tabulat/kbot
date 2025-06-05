@@ -2,7 +2,7 @@ APP=$(shell basename $(shell git remote get-url origin))
 REGISTRY=tabulat
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETOS=linux #linux darwin windows
-TARGETARCH=amd64 #arm64
+TARGETARCH=amd64 #arm64 windows
 
 format:
 	gofmt -s -w ./
