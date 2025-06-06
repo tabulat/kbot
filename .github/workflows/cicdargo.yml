@@ -1,0 +1,70 @@
+name: KBOT-CICDARGO
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  TARGETARCH: amd64
+  TARGETOS: linux
+  APP: kbot
+  REGISTRY: ghcr.io/tabulat
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Run tests
+        run: make test
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate version
+        run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Build & Push Docker image
+        run: make image push
+
+  cd:
+    name: CD
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set version
+        run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Update Helm chart image tag
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -i '.image.tag = strenv(VERSION)' helm/values.yaml
+
+      - name: Commit updated Helm chart
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "update version $VERSION"
+          git push
