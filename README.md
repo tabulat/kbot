@@ -50,7 +50,7 @@ Start the bot:
 ## Development
 
 The project uses Cobra for CLI command management.
-Develop 3
+Develop 4
 
 ### Project Structure
 
