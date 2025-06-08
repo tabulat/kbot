@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     parameters {
         choice(
             name: 'OS',
@@ -22,5 +22,16 @@ pipeline {
             defaultValue: false,
             description: 'Skip running linter'
         )
+    }
+
+    stages {
+        stage('Example') {
+            steps {
+                echo "Selected OS: ${params.OS}"
+                echo "Selected ARCH: ${params.ARCH}"
+                echo "Skip Tests: ${params.SKIP_TESTS}"
+                echo "Skip Lint: ${params.SKIP_LINT}"
+            }
+        }
     }
 }
