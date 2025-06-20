@@ -2,7 +2,7 @@ APP=$(shell basename $(shell git remote get-url origin))
 REGISTRY=ghcr.io/tabulat
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
-TARGETARCH=amd64
+TARGETARCH=amd64 #arm64
 
 format:
 	gofmt -s -w ./
