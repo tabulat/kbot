@@ -9,7 +9,7 @@ image:
   registry: "ghcr.io"
   repository: "tabulat"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.5.19-14a585d"
+  tag: "v1.5.22-411740f"
   os: linux
   arch: amd64
 secret:
