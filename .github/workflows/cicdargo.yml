@@ -2,8 +2,9 @@ name: KBOT-CICDARGO
 
 on:
   push:
-    branches:
-      - develop
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 env:
   TARGETARCH: amd64
