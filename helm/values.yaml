@@ -12,10 +12,17 @@ image:
   tag: "v1.5.25-26e5507"
   os: linux
   arch: amd64
+  
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
   key: "token"
+  
 service:
   name: http
   port: 80
+  
+# Розділені контексти безпеки
+podSecurityContext: {} # Залишити пустим, якщо немає налаштувань для всього Pod'а
+containerSecurityContext:
+  privileged: true # Це для контейнера
