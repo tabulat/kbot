@@ -9,7 +9,7 @@ image:
   registry: "ghcr.io"
   repository: "tabulat/kbot"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.5.25-4dc7d2e"
+  tag: "v1.5.25-3a92ab2"
   os: linux
   arch: amd64
 secret:
@@ -22,6 +22,5 @@ service:
 podSecurityContext: {} # Залиште пустим, якщо не маєте глобальних налаштувань безпеки для всього Pod'а
 containerSecurityContext:
   privileged: true # Це належить до контейнера
-
 imagePullSecrets:
   - name: ghcr-secret # Ім'я вашого Secret для GHCR.io
