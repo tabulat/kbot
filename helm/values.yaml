@@ -9,20 +9,17 @@ image:
   registry: "ghcr.io"
   repository: "tabulat/kbot"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.5.25-b583b6b"
+  tag: "v1.5.25-2ecef37"
   os: linux
   arch: amd64
   pullPolicy: IfNotPresent # Додано pullPolicy, можна змінити на Always, якщо потрібно
-  
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
   key: "token"
-  
 service:
   name: http
   port: 80
-  
 # Розділені контексти безпеки
 podSecurityContext: {} # Залишити пустим, якщо немає налаштувань для всього Pod'а
 containerSecurityContext:
