@@ -9,7 +9,7 @@ image:
   registry: "ghcr.io"
   repository: "tabulat/kbot"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.5.25-3a92ab2"
+  tag: "v1.5.25-34ef7e4"
   os: linux
   arch: amd64
 secret:
