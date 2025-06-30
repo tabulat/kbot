@@ -19,8 +19,3 @@ secret:
 service:
   name: http
   port: 80
-podSecurityContext: {} # Залиште пустим, якщо не маєте глобальних налаштувань безпеки для всього Pod'а
-containerSecurityContext:
-  privileged: true # Це належить до контейнера
-imagePullSecrets:
-  - name: ghcr-secret # Ім'я вашого Secret для GHCR.io
